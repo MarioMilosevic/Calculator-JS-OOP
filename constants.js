@@ -26,6 +26,23 @@ export function init() {
   const del = document.querySelector(".delete");
   const result = document.querySelector(".resultDiv");
   const calculations = document.querySelector(".calculations");
+  const elements = [
+    number1,
+    number2,
+    number3,
+    number4,
+    number5,
+    number6,
+    number7,
+    number8,
+    number9,
+    number0,
+    plus,
+    minus,
+    multiply,
+    divide,
+    dot,
+  ];
   return {
     number1,
     number2,
@@ -47,5 +64,6 @@ export function init() {
     del,
     result,
     calculations,
+    elements,
   };
 }

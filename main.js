@@ -1,6 +1,6 @@
 "use strict";
 import { init } from "./constants";
-
+import { showElement } from "./helpers";
 const {
   number1,
   number2,
@@ -12,6 +12,7 @@ const {
   number8,
   number9,
   number0,
+  elements,
   plus,
   minus,
   multiply,
@@ -25,23 +26,42 @@ const {
 } = init();
 
 function calculatorCreator() {
-  let firstOperand = "";
+  let firstOperand = '';
   let secondOperand = "";
 
-  const updateUI = (number) => {
-    result.textContent = number;
+  const updateLowerUI = (number) => {
+    firstOperand += number;
+    result.textContent = firstOperand;
+    console.log(firstOperand);
   };
+
+  const updateUpperUI = () => {
+   secondOperand = eval(firstOperand)
+   calculations.textContent = secondOperand
+   firstOperand = ''
+   result.textContent = ''
+ 
+  }
 
   return {
     firstOperand,
     secondOperand,
-    updateUI,
+    updateLowerUI,
+    updateUpperUI
   };
 }
 
 const calculator = calculatorCreator();
 
-number1.addEventListener("click", function (e) {
-  const target = e.target.innerText
-  calculator.updateUI(target)
+elements.forEach((el) => {
+  el.addEventListener("click", function (e) {
+    // uzme event vrijednost, i updateUI sa targetom
+    showElement(e, calculator);
+  });
 });
+
+
+equals.addEventListener('click', function(){
+  console.log('radi');
+  calculator.updateUpperUI()
+})
