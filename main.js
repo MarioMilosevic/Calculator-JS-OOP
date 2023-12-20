@@ -20,8 +20,28 @@ const {
   clear,
   dot,
   del,
+  result,
+  calculations,
 } = init();
 
-number1.addEventListener('click', function(){
-    console.log('1');
-})
+function calculatorCreator() {
+  let firstOperand = "";
+  let secondOperand = "";
+
+  const updateUI = (number) => {
+    result.textContent = number;
+  };
+
+  return {
+    firstOperand,
+    secondOperand,
+    updateUI,
+  };
+}
+
+const calculator = calculatorCreator();
+
+number1.addEventListener("click", function (e) {
+  const target = e.target.innerText
+  calculator.updateUI(target)
+});

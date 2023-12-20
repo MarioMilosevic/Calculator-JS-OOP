@@ -24,7 +24,8 @@ export function init() {
   const equals = document.querySelector(".equals");
   const clear = document.querySelector(".clear");
   const del = document.querySelector(".delete");
-
+  const result = document.querySelector(".resultDiv");
+  const calculations = document.querySelector(".calculations");
   return {
     number1,
     number2,
@@ -43,6 +44,8 @@ export function init() {
     dot,
     equals,
     clear,
-    del
+    del,
+    result,
+    calculations,
   };
 }
