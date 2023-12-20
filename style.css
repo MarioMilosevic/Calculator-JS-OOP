@@ -20,7 +20,7 @@ html {
 .display {
   width: 90%;
   height: 20%;
-  margin: 0 auto;
+  margin: 1rem auto 0;
 }
 
 .calculations,
@@ -28,11 +28,15 @@ html {
   width: 100%;
   height: 50%;
   background-color: #fff;
+  padding-right: 2rem;
+  text-align: right;
 }
 
 .calculations {
+  font-size: 2rem;
 }
 .resultDiv {
+  font-size: 3rem;
 }
 
 .clearDelete {
@@ -42,10 +46,12 @@ html {
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
+  
 }
 
 .clear,
 .delete {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +73,7 @@ html {
   display: grid;
   place-items: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 60%;
+  height: 55%;
   width: 90%;
   margin: 0 auto;
 }
@@ -80,4 +86,8 @@ html {
   place-items: center;
   background-color: #fff;
   cursor: pointer;
+}
+
+.btn:hover{
+  transform: translate(2%, 2%);
 }
