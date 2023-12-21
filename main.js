@@ -1,6 +1,6 @@
 "use strict";
 import { init } from "./constants";
-import { showNumber, addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
+import { addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
 
 const {
   number1,
@@ -33,10 +33,12 @@ function calculatorCreator() {
   let operation = "";
   let res = 0;
 
-  const updateState = () => {};
+  const updateState = (num1) => {
+  firstOperand = num1
+  };
 
   const updateUI = (value) => {
-    result.textContent += value
+  result.textContent += value 
   };
   return {
     firstOperand,
@@ -46,22 +48,11 @@ function calculatorCreator() {
   };
 }
 
-const calculator = calculatorCreator();
-calculator.updateState();
+const calculator = calculatorCreator()
 
-numbers.forEach((num) => {
-  num.addEventListener("click", function (e) {
-    // uzme event vrijednost, i updateUI sa targetom
-    showNumber(e, calculator);
-  });
-});
-
-operators.forEach((operator) => {
-  operator.addEventListener("click", function () {
-    calculator.updateUpperUI();
-  });
-});
-
-// equals.addEventListener("click", function () {
-//   calculator.updateUpperUI();
-// });
+numbers.forEach(num => num.addEventListener('click', function(e){
+console.log(e.target.id);
+const target = e.target.id
+calculator.updateState(target)
+calculator.updateUI(target)
+}))
