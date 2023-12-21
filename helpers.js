@@ -1,6 +1,6 @@
 'use strict'
 
-export const showElement = (e, el) => {
+export const showNumber = (e, el) => {
     const target = e.target.innerText
     el.updateLowerUI(target)
   };

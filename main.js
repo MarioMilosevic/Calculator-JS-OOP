@@ -1,6 +1,7 @@
 "use strict";
 import { init } from "./constants";
-import { showElement } from "./helpers";
+import { showNumber } from "./helpers";
+
 const {
   number1,
   number2,
@@ -12,7 +13,7 @@ const {
   number8,
   number9,
   number0,
-  elements,
+  numbers,
   plus,
   minus,
   multiply,
@@ -23,45 +24,61 @@ const {
   del,
   result,
   calculations,
+  operators,
+  numOper,
 } = init();
 
 function calculatorCreator() {
-  let firstOperand = '';
+  let firstOperand = "";
   let secondOperand = "";
+  let firstOperandNumber = 0;
+  let secondOperandNumber = 0  
 
-  const updateLowerUI = (number) => {
-    firstOperand += number;
+  const updateLowerUI = (value) => {
+    firstOperand += value;
+    firstOperandNumber = parseInt(firstOperand)
+    console.log('first operand number' ,firstOperandNumber);
     result.textContent = firstOperand;
-    console.log(firstOperand);
+    console.log("first operand", firstOperand);
   };
 
+  const add = (a, b) => a + b;
+
   const updateUpperUI = () => {
-   secondOperand = eval(firstOperand)
-   calculations.textContent = secondOperand
-   firstOperand = ''
-   result.textContent = ''
- 
-  }
+    console.log(firstOperand);
+    secondOperand += firstOperand;
+    // console.log("second operand", parseInt(secondOperand, 10));
+    calculations.textContent = secondOperand;
+    secondOperandNumber = parseInt(secondOperand, 10)
+    console.log(secondOperandNumber);
+    firstOperand = "";
+    result.textContent = "";
+  };
 
   return {
     firstOperand,
     secondOperand,
     updateLowerUI,
-    updateUpperUI
+    updateUpperUI,
+    add
   };
 }
 
 const calculator = calculatorCreator();
 
-elements.forEach((el) => {
-  el.addEventListener("click", function (e) {
+numOper.forEach((numO) => {
+  numO.addEventListener("click", function (e) {
     // uzme event vrijednost, i updateUI sa targetom
-    showElement(e, calculator);
+    showNumber(e, calculator);
   });
 });
 
+operators.forEach((operator) => {
+  operator.addEventListener("click", function () {
+    calculator.updateUpperUI();
+  });
+});
 
-equals.addEventListener('click', function(){
-  console.log('radi');
-  calculator.updateUpperUI()
-})
+// equals.addEventListener("click", function () {
+//   calculator.updateUpperUI();
+// });

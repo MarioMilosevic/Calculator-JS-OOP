@@ -7,6 +7,9 @@
 html {
   font-size: 62.5%;
 }
+body {
+  background-color: #f1f5f9;
+}
 
 .calculator {
   width: 50rem;
@@ -47,7 +50,6 @@ html {
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
-  
 }
 
 .clear,
@@ -89,6 +91,6 @@ html {
   cursor: pointer;
 }
 
-.btn:hover{
-  transform: translate(2%, 2%);
+.btn:hover {
+  background-color: #f1f5f9;
 }

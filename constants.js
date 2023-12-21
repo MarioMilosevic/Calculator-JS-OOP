@@ -12,21 +12,7 @@ export function init() {
   const number8 = document.querySelector(".number8");
   const number9 = document.querySelector(".number9");
   const number0 = document.querySelector(".number0");
-
-  // Operators
-  const plus = document.querySelector(".plus");
-  const minus = document.querySelector(".minus");
-  const multiply = document.querySelector(".multiply");
-  const divide = document.querySelector(".divide");
-
-  // Other
-  const dot = document.querySelector(".dot");
-  const equals = document.querySelector(".equals");
-  const clear = document.querySelector(".clear");
-  const del = document.querySelector(".delete");
-  const result = document.querySelector(".resultDiv");
-  const calculations = document.querySelector(".calculations");
-  const elements = [
+  const numbers = [
     number1,
     number2,
     number3,
@@ -37,12 +23,22 @@ export function init() {
     number8,
     number9,
     number0,
-    plus,
-    minus,
-    multiply,
-    divide,
-    dot,
   ];
+  // Operators
+  const plus = document.querySelector(".plus");
+  const minus = document.querySelector(".minus");
+  const multiply = document.querySelector(".multiply");
+  const divide = document.querySelector(".divide");
+  const operators = [plus, minus, multiply, divide]
+  const numOper = [...numbers, ...operators]
+  // Other
+  const dot = document.querySelector(".dot");
+  const equals = document.querySelector(".equals");
+  const clear = document.querySelector(".clear");
+  const del = document.querySelector(".delete");
+  const result = document.querySelector(".resultDiv");
+  const calculations = document.querySelector(".calculations");
+ 
   return {
     number1,
     number2,
@@ -64,6 +60,8 @@ export function init() {
     del,
     result,
     calculations,
-    elements,
+    numbers,
+    operators,
+    numOper
   };
 }
