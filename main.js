@@ -1,6 +1,6 @@
 "use strict";
 import { init } from "./constants";
-import { addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
+import { getTarget, addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
 
 const {
   number1,
@@ -33,26 +33,54 @@ function calculatorCreator() {
   let operation = "";
   let res = 0;
 
-  const updateState = (num1) => {
-  firstOperand = num1
+  const updateFirstOperand = (e) => {
+    const target = getTarget(e);
+    firstOperand += target;
+    console.log('first operand prvi' , firstOperand);
   };
 
-  const updateUI = (value) => {
-  result.textContent += value 
+  const updateSecondOperand = (e) => {
+    const target = getTarget(e);
+    secondOperand = firstOperand;
+    firstOperand = "";
+    operation = target;
+    console.log('first operand', firstOperand);
+    console.log('second operand', secondOperand);
+    console.log('operation', operation);
   };
+
   return {
     firstOperand,
     secondOperand,
-    updateState,
-    updateUI,
+    operation,
+    updateFirstOperand,
+    updateSecondOperand,
   };
 }
 
-const calculator = calculatorCreator()
+const calculator = calculatorCreator();
 
-numbers.forEach(num => num.addEventListener('click', function(e){
-console.log(e.target.id);
-const target = e.target.id
-calculator.updateState(target)
-calculator.updateUI(target)
-}))
+let testOperator = "";
+let testOperator2 = "";
+let testOperation = "";
+
+numbers.forEach((num) =>
+  num.addEventListener("click", function (e) {
+    calculator.updateFirstOperand(e);
+  })
+);
+
+operators.forEach((operator) =>
+  operator.addEventListener("click", function (e) {
+    calculator.updateSecondOperand(e)
+    // const target = getTarget(e);
+    // console.log(target);
+    // // calculator.updateUI(target);
+    // testOperator2 = testOperator;
+    // testOperator = "";
+    // testOperation = target;
+    // console.log(testOperator + " ovo je prvi operator");
+    // console.log(testOperator2 + " ovo je drugi operator");
+    // console.log(testOperation + " ovo je operacija");
+  })
+);
