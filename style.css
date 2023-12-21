@@ -12,6 +12,7 @@ body {
 }
 
 .calculator {
+  border-radius: 5px;
   width: 50rem;
   margin: 10rem auto;
   height: 50rem;

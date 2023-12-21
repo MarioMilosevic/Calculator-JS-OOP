@@ -1,6 +1,6 @@
 "use strict";
 import { init } from "./constants";
-import { showNumber } from "./helpers";
+import { showNumber, addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
 
 const {
   number1,
@@ -25,49 +25,32 @@ const {
   result,
   calculations,
   operators,
-  numOper,
 } = init();
 
 function calculatorCreator() {
   let firstOperand = "";
   let secondOperand = "";
-  let firstOperandNumber = 0;
-  let secondOperandNumber = 0  
+  let operation = "";
+  let res = 0;
 
-  const updateLowerUI = (value) => {
-    firstOperand += value;
-    firstOperandNumber = parseInt(firstOperand)
-    console.log('first operand number' ,firstOperandNumber);
-    result.textContent = firstOperand;
-    console.log("first operand", firstOperand);
+  const updateState = () => {};
+
+  const updateUI = (value) => {
+    result.textContent += value
   };
-
-  const add = (a, b) => a + b;
-
-  const updateUpperUI = () => {
-    console.log(firstOperand);
-    secondOperand += firstOperand;
-    // console.log("second operand", parseInt(secondOperand, 10));
-    calculations.textContent = secondOperand;
-    secondOperandNumber = parseInt(secondOperand, 10)
-    console.log(secondOperandNumber);
-    firstOperand = "";
-    result.textContent = "";
-  };
-
   return {
     firstOperand,
     secondOperand,
-    updateLowerUI,
-    updateUpperUI,
-    add
+    updateState,
+    updateUI,
   };
 }
 
 const calculator = calculatorCreator();
+calculator.updateState();
 
-numOper.forEach((numO) => {
-  numO.addEventListener("click", function (e) {
+numbers.forEach((num) => {
+  num.addEventListener("click", function (e) {
     // uzme event vrijednost, i updateUI sa targetom
     showNumber(e, calculator);
   });

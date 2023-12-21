@@ -30,7 +30,6 @@ export function init() {
   const multiply = document.querySelector(".multiply");
   const divide = document.querySelector(".divide");
   const operators = [plus, minus, multiply, divide]
-  const numOper = [...numbers, ...operators]
   // Other
   const dot = document.querySelector(".dot");
   const equals = document.querySelector(".equals");
@@ -62,6 +61,5 @@ export function init() {
     calculations,
     numbers,
     operators,
-    numOper
   };
 }
