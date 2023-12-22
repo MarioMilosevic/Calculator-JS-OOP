@@ -35,7 +35,7 @@ export function init() {
   const equals = document.querySelector(".equals");
   const clear = document.querySelector(".clear");
   const del = document.querySelector(".delete");
-  const result = document.querySelector(".resultDiv");
+  const resultDiv = document.querySelector(".resultDiv");
   const calculations = document.querySelector(".calculations");
  
   return {
@@ -57,7 +57,7 @@ export function init() {
     equals,
     clear,
     del,
-    result,
+    resultDiv,
     calculations,
     numbers,
     operators,

@@ -22,7 +22,7 @@ const {
   clear,
   dot,
   del,
-  result,
+  resultDiv,
   calculations,
   operators,
 } = init();
@@ -79,11 +79,31 @@ function calculatorCreator() {
   };
 }
 
+function updateUI(){
+const updateUpperUI = (num, o) => {
+  calculations.textContent = `${num}${o}`
+}
+
+const updateLowerUI = (value) => {
+  resultDiv.textContent = value
+}
+
+return {
+  updateUpperUI, 
+  updateLowerUI
+}
+}
+
+
+
 const calculator = calculatorCreator();
+const userInterface = updateUI()
+
 
 numbers.forEach((num) =>
   num.addEventListener("click", function (e) {
     calculator.updateFirstOperand(e);
+    userInterface.updateLowerUI(calculator.getFirstOperand())
     console.log("first operand prva", calculator.getFirstOperand());
     console.log("second operand prva", calculator.getSecondOperand());
     console.log("operacija prva", calculator.getOperation());
@@ -95,6 +115,8 @@ operators.forEach((operator) =>
     // kada nemam OPERACIJU i nemam DRUGI OPERAND
     if (!calculator.getOperation() && !calculator.getSecondOperand()) {
       calculator.updateSecondOperand(e);
+      userInterface.updateUpperUI(calculator.getSecondOperand(), calculator.getOperation())
+      userInterface.updateLowerUI('')
       // kada imam svo troje
     } else if (
       calculator.getFirstOperand() &&
@@ -126,7 +148,8 @@ equals.addEventListener("click", function () {
   calculator.setFirstOperand(result);
   calculator.setSecondOperand("");
   calculator.setOperation("");
-
+    userInterface.updateLowerUI(result)
+    userInterface.updateUpperUI('', '')
   console.log("first operand rezultat", calculator.getFirstOperand());
   console.log("second operand rezultat", calculator.getSecondOperand());
   console.log("operacija rezultat", calculator.getOperation());
