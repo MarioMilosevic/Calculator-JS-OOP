@@ -79,34 +79,31 @@ function calculatorCreator() {
   };
 }
 
-function updateUI(){
-const updateUpperUI = (num, o) => {
-  calculations.textContent = `${num}${o}`
-}
+function updateUI() {
+  const updateUpperUI = (num, o) => {
+    calculations.textContent = `${num}${o}`;
+  };
 
-const updateLowerUI = (value) => {
-  resultDiv.textContent = value
-}
+  const updateLowerUI = (value) => {
+    resultDiv.textContent = value;
+  };
 
-return {
-  updateUpperUI, 
-  updateLowerUI
+  return {
+    updateUpperUI,
+    updateLowerUI,
+  };
 }
-}
-
-
 
 const calculator = calculatorCreator();
-const userInterface = updateUI()
-
+const userInterface = updateUI();
 
 numbers.forEach((num) =>
   num.addEventListener("click", function (e) {
     calculator.updateFirstOperand(e);
-    userInterface.updateLowerUI(calculator.getFirstOperand())
-    console.log("first operand prva", calculator.getFirstOperand());
-    console.log("second operand prva", calculator.getSecondOperand());
-    console.log("operacija prva", calculator.getOperation());
+    userInterface.updateLowerUI(calculator.getFirstOperand());
+    // console.log("first operand prva", calculator.getFirstOperand());
+    // console.log("second operand prva", calculator.getSecondOperand());
+    // console.log("operacija prva", calculator.getOperation());
   })
 );
 
@@ -115,8 +112,11 @@ operators.forEach((operator) =>
     // kada nemam OPERACIJU i nemam DRUGI OPERAND
     if (!calculator.getOperation() && !calculator.getSecondOperand()) {
       calculator.updateSecondOperand(e);
-      userInterface.updateUpperUI(calculator.getSecondOperand(), calculator.getOperation())
-      userInterface.updateLowerUI('')
+      userInterface.updateUpperUI(
+        calculator.getSecondOperand(),
+        calculator.getOperation()
+      );
+      userInterface.updateLowerUI("");
       // kada imam svo troje
     } else if (
       calculator.getFirstOperand() &&
@@ -131,10 +131,15 @@ operators.forEach((operator) =>
       calculator.setFirstOperand("");
       calculator.setOperation(e.target.id);
       calculator.setSecondOperand(result);
+      userInterface.updateLowerUI("");
+      userInterface.updateUpperUI(
+        calculator.getSecondOperand(),
+        calculator.getOperation()
+      );
     }
-    console.log("first operand druga", calculator.getFirstOperand());
-    console.log("second operand druga", calculator.getSecondOperand());
-    console.log("operacija druga", calculator.getOperation());
+    // console.log("first operand druga", calculator.getFirstOperand());
+    // console.log("second operand druga", calculator.getSecondOperand());
+    // console.log("operacija druga", calculator.getOperation());
     // console.log("rezultat", calculator.getResult());
   })
 );
@@ -148,9 +153,17 @@ equals.addEventListener("click", function () {
   calculator.setFirstOperand(result);
   calculator.setSecondOperand("");
   calculator.setOperation("");
-    userInterface.updateLowerUI(result)
-    userInterface.updateUpperUI('', '')
-  console.log("first operand rezultat", calculator.getFirstOperand());
-  console.log("second operand rezultat", calculator.getSecondOperand());
-  console.log("operacija rezultat", calculator.getOperation());
+  userInterface.updateLowerUI(result);
+  userInterface.updateUpperUI("", "");
+  // console.log("first operand rezultat", calculator.getFirstOperand());
+  // console.log("second operand rezultat", calculator.getSecondOperand());
+  // console.log("operacija rezultat", calculator.getOperation());
 });
+
+clear.addEventListener('click', function(){
+  calculator.setFirstOperand('')
+  calculator.setSecondOperand('')
+  calculator.setOperation('')
+  userInterface.updateLowerUI(0)
+  userInterface.updateUpperUI('','')
+})
