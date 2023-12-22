@@ -160,10 +160,17 @@ equals.addEventListener("click", function () {
   // console.log("operacija rezultat", calculator.getOperation());
 });
 
-clear.addEventListener('click', function(){
-  calculator.setFirstOperand('')
-  calculator.setSecondOperand('')
-  calculator.setOperation('')
-  userInterface.updateLowerUI(0)
-  userInterface.updateUpperUI('','')
-})
+clear.addEventListener("click", function () {
+  calculator.setFirstOperand("");
+  calculator.setSecondOperand("");
+  calculator.setOperation("");
+  userInterface.updateLowerUI(0);
+  userInterface.updateUpperUI("", "");
+});
+
+del.addEventListener("click", function () {
+  const first = calculator.getFirstOperand().slice(0, -1);
+  console.log(first);
+  calculator.setFirstOperand(first);
+  userInterface.updateLowerUI(first);
+});
