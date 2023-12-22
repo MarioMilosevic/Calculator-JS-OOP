@@ -1,13 +1,6 @@
 "use strict";
 import { init } from "./constants";
-import {
-  getTarget,
-  addFn,
-  subtractFn,
-  divideFn,
-  multiplyFn,
-  calculate,
-} from "./helpers";
+import { addFn, subtractFn, divideFn, multiplyFn, calculate } from "./helpers";
 
 const {
   number1,
@@ -41,26 +34,23 @@ function calculatorCreator() {
   let res = 0;
 
   const getFirstOperand = () => firstOperand;
-  const setFirstOperand = (value) => (firstOperand = value);
+  const setFirstOperand = (num) => (firstOperand = num);
   const getSecondOperand = () => secondOperand;
+  const setSecondOperand = (num) => (secondOperand = num);
 
   const getOperation = () => operation;
   const setOperation = (value) => (operation = value);
   const getResult = () => res;
 
   const updateFirstOperand = (e) => {
-    const target = getTarget(e);
+    const target = e.target.id;
     firstOperand += target;
   };
 
   const updateSecondOperand = (e) => {
     secondOperand = firstOperand;
     firstOperand = "";
-    operation = e.target.textContent;
-  };
-
-  const setSecondOperand = (num) => {
-    secondOperand = num;
+    operation = e.target.id;
   };
 
   const computeResult = (a, b, o) => {
@@ -94,13 +84,18 @@ const calculator = calculatorCreator();
 numbers.forEach((num) =>
   num.addEventListener("click", function (e) {
     calculator.updateFirstOperand(e);
+    console.log("first operand prva", calculator.getFirstOperand());
+    console.log("second operand prva", calculator.getSecondOperand());
+    console.log("operacija prva", calculator.getOperation());
   })
 );
 
 operators.forEach((operator) =>
   operator.addEventListener("click", function (e) {
+    // kada nemam OPERACIJU i nemam DRUGI OPERAND
     if (!calculator.getOperation() && !calculator.getSecondOperand()) {
       calculator.updateSecondOperand(e);
+      // kada imam svo troje
     } else if (
       calculator.getFirstOperand() &&
       calculator.getOperation() &&
@@ -114,12 +109,25 @@ operators.forEach((operator) =>
       calculator.setFirstOperand("");
       calculator.setOperation(e.target.id);
       calculator.setSecondOperand(result);
-      console.log("aaaaaaaaaaaaa");
     }
-
-    console.log("first operand", calculator.getFirstOperand());
-    console.log("second operand", calculator.getSecondOperand());
-    console.log("operacija", calculator.getOperation());
+    console.log("first operand druga", calculator.getFirstOperand());
+    console.log("second operand druga", calculator.getSecondOperand());
+    console.log("operacija druga", calculator.getOperation());
     // console.log("rezultat", calculator.getResult());
   })
 );
+
+equals.addEventListener("click", function () {
+  const result = calculator.computeResult(
+    parseInt(calculator.getSecondOperand()),
+    parseInt(calculator.getFirstOperand()),
+    calculator.getOperation()
+  );
+  calculator.setFirstOperand(result);
+  calculator.setSecondOperand("");
+  calculator.setOperation("");
+
+  console.log("first operand rezultat", calculator.getFirstOperand());
+  console.log("second operand rezultat", calculator.getSecondOperand());
+  console.log("operacija rezultat", calculator.getOperation());
+});

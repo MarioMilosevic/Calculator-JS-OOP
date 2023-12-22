@@ -1,9 +1,6 @@
 "use strict";
 
-export const getTarget = (e) => {
-  const target = e.target.id;
-  return target;
-};
+
 
 export const addFn = (a, b) => a + b;
 export const subtractFn = (a, b) => a - b;
