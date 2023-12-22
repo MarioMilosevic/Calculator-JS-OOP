@@ -43,17 +43,24 @@ function calculatorCreator() {
   const updateFirstOperand = (e) => {
     const target = getTarget(e);
     firstOperand += target;
+    // imam firstoperand
     console.log("first operand prva", firstOperand);
   };
 
   const updateSecondOperand = (e) => {
     const target = getTarget(e);
-    operation = target;
     if (!secondOperand) {
+      // ako nemam secondOperand dodjeljujem mu vrijednost firstOperand
+      operation = target;
       secondOperand = firstOperand;
       console.log("jeste");
     } else {
-      computeResult(parseInt(secondOperand), parseInt(firstOperand), operation);
+      console.log('nije');
+     res = computeResult(parseInt(secondOperand), parseInt(firstOperand), operation);
+     
+     secondOperand = res
+     console.log('drugi i prvi', secondOperand, firstOperand);
+     console.log(res);
     }
     firstOperand = "";
     console.log("first operand druga", firstOperand);
@@ -63,17 +70,13 @@ function calculatorCreator() {
 
   const computeResult = (a, b, o) => {
     if (o === "+") {
-      res = addFn(a, b);
-      console.log(res);
+     return addFn(a, b);
     } else if (o === "-") {
-      res = subtractFn(a, b);
-      console.log(res);
+     return subtractFn(a, b);
     } else if (o === "*") {
-      res = multiplyFn(a, b);
-      console.log(res);
+      return multiplyFn(a, b);
     } else if (o === "/") {
-      res = divideFn(a, b);
-      console.log(res);
+      return divideFn(a, b);
     }
   };
 
