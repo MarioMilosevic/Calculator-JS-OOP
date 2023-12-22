@@ -40,39 +40,34 @@ function calculatorCreator() {
   let operation = "";
   let res = 0;
 
+  const getFirstOperand = () => firstOperand;
+  const setFirstOperand = (value) => (firstOperand = value);
+  const getSecondOperand = () => secondOperand;
+
+  const getOperation = () => operation;
+  const setOperation = (value) => (operation = value);
+  const getResult = () => res;
+
   const updateFirstOperand = (e) => {
     const target = getTarget(e);
     firstOperand += target;
-    // imam firstoperand
-    console.log("first operand prva", firstOperand);
   };
 
   const updateSecondOperand = (e) => {
-    const target = getTarget(e);
-    if (!secondOperand) {
-      // ako nemam secondOperand dodjeljujem mu vrijednost firstOperand
-      operation = target;
-      secondOperand = firstOperand;
-      console.log("jeste");
-    } else {
-      console.log('nije');
-     res = computeResult(parseInt(secondOperand), parseInt(firstOperand), operation);
-     
-     secondOperand = res
-     console.log('drugi i prvi', secondOperand, firstOperand);
-     console.log(res);
-    }
+    secondOperand = firstOperand;
     firstOperand = "";
-    console.log("first operand druga", firstOperand);
-    console.log("second operand druga", secondOperand);
-    console.log("operacija", operation);
+    operation = e.target.textContent;
+  };
+
+  const setSecondOperand = (num) => {
+    secondOperand = num;
   };
 
   const computeResult = (a, b, o) => {
     if (o === "+") {
-     return addFn(a, b);
+      return addFn(a, b);
     } else if (o === "-") {
-     return subtractFn(a, b);
+      return subtractFn(a, b);
     } else if (o === "*") {
       return multiplyFn(a, b);
     } else if (o === "/") {
@@ -81,10 +76,14 @@ function calculatorCreator() {
   };
 
   return {
-    firstOperand,
-    secondOperand,
-    operation,
-    res,
+    getFirstOperand,
+    setFirstOperand,
+    getSecondOperand,
+    getOperation,
+    getResult,
+    setOperation,
+    setSecondOperand,
+    computeResult,
     updateFirstOperand,
     updateSecondOperand,
   };
@@ -100,6 +99,27 @@ numbers.forEach((num) =>
 
 operators.forEach((operator) =>
   operator.addEventListener("click", function (e) {
-    calculator.updateSecondOperand(e);
+    if (!calculator.getOperation() && !calculator.getSecondOperand()) {
+      calculator.updateSecondOperand(e);
+    } else if (
+      calculator.getFirstOperand() &&
+      calculator.getOperation() &&
+      calculator.getSecondOperand()
+    ) {
+      const result = calculator.computeResult(
+        parseInt(calculator.getSecondOperand()),
+        parseInt(calculator.getFirstOperand()),
+        calculator.getOperation()
+      );
+      calculator.setFirstOperand("");
+      calculator.setOperation(e.target.id);
+      calculator.setSecondOperand(result);
+      console.log("aaaaaaaaaaaaa");
+    }
+
+    console.log("first operand", calculator.getFirstOperand());
+    console.log("second operand", calculator.getSecondOperand());
+    console.log("operacija", calculator.getOperation());
+    // console.log("rezultat", calculator.getResult());
   })
 );
