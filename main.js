@@ -1,6 +1,13 @@
 "use strict";
 import { init } from "./constants";
-import { getTarget, addFn, subtractFn, divideFn, multiplyFn } from "./helpers";
+import {
+  getTarget,
+  addFn,
+  subtractFn,
+  divideFn,
+  multiplyFn,
+  calculate,
+} from "./helpers";
 
 const {
   number1,
@@ -36,33 +43,51 @@ function calculatorCreator() {
   const updateFirstOperand = (e) => {
     const target = getTarget(e);
     firstOperand += target;
-    console.log('first operand prvi' , firstOperand);
+    console.log("first operand prva", firstOperand);
   };
 
   const updateSecondOperand = (e) => {
     const target = getTarget(e);
-    secondOperand = firstOperand;
-    firstOperand = "";
     operation = target;
-    console.log('first operand', firstOperand);
-    console.log('second operand', secondOperand);
-    console.log('operation', operation);
+    if (!secondOperand) {
+      secondOperand = firstOperand;
+      console.log("jeste");
+    } else {
+      computeResult(parseInt(secondOperand), parseInt(firstOperand), operation);
+    }
+    firstOperand = "";
+    console.log("first operand druga", firstOperand);
+    console.log("second operand druga", secondOperand);
+    console.log("operacija", operation);
+  };
+
+  const computeResult = (a, b, o) => {
+    if (o === "+") {
+      res = addFn(a, b);
+      console.log(res);
+    } else if (o === "-") {
+      res = subtractFn(a, b);
+      console.log(res);
+    } else if (o === "*") {
+      res = multiplyFn(a, b);
+      console.log(res);
+    } else if (o === "/") {
+      res = divideFn(a, b);
+      console.log(res);
+    }
   };
 
   return {
     firstOperand,
     secondOperand,
     operation,
+    res,
     updateFirstOperand,
     updateSecondOperand,
   };
 }
 
 const calculator = calculatorCreator();
-
-let testOperator = "";
-let testOperator2 = "";
-let testOperation = "";
 
 numbers.forEach((num) =>
   num.addEventListener("click", function (e) {
@@ -72,15 +97,6 @@ numbers.forEach((num) =>
 
 operators.forEach((operator) =>
   operator.addEventListener("click", function (e) {
-    calculator.updateSecondOperand(e)
-    // const target = getTarget(e);
-    // console.log(target);
-    // // calculator.updateUI(target);
-    // testOperator2 = testOperator;
-    // testOperator = "";
-    // testOperation = target;
-    // console.log(testOperator + " ovo je prvi operator");
-    // console.log(testOperator2 + " ovo je drugi operator");
-    // console.log(testOperation + " ovo je operacija");
+    calculator.updateSecondOperand(e);
   })
 );
