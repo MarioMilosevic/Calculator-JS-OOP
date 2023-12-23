@@ -41,6 +41,7 @@ function calculatorCreator() {
   const getOperation = () => operation;
   const setOperation = (value) => (operation = value);
   const getResult = () => res;
+  const setResult = (value) => (res = value);
 
   const updateFirstOperand = (e) => {
     const target = e.target.id;
@@ -71,6 +72,7 @@ function calculatorCreator() {
     getSecondOperand,
     getOperation,
     getResult,
+    setResult,
     setOperation,
     setSecondOperand,
     computeResult,
@@ -124,13 +126,13 @@ operators.forEach((operator) =>
       calculator.getSecondOperand()
     ) {
       const result = calculator.computeResult(
-        parseInt(calculator.getSecondOperand()),
-        parseInt(calculator.getFirstOperand()),
+        parseFloat(calculator.getSecondOperand()),
+        parseFloat(calculator.getFirstOperand()),
         calculator.getOperation()
       );
       calculator.setFirstOperand("");
       calculator.setOperation(e.target.id);
-      calculator.setSecondOperand(result);
+      calculator.setSecondOperand(result.toFixed(1));
       userInterface.updateLowerUI("");
       userInterface.updateUpperUI(
         calculator.getSecondOperand(),
@@ -145,19 +147,21 @@ operators.forEach((operator) =>
 );
 
 equals.addEventListener("click", function () {
-  const result = calculator.computeResult(
-    parseInt(calculator.getSecondOperand()),
-    parseInt(calculator.getFirstOperand()),
-    calculator.getOperation()
-  );
-  calculator.setFirstOperand('');
+  calculator.setResult(calculator.computeResult(parseFloat(calculator.getSecondOperand()), parseFloat(calculator.getFirstOperand()), calculator.getOperation()))
+  // const result = calculator.computeResult(
+  //   parseInt(calculator.getSecondOperand()),
+  //   parseInt(calculator.getFirstOperand()),
+  //   calculator.getOperation()
+  // );
+  calculator.setFirstOperand("");
   calculator.setSecondOperand("");
   calculator.setOperation("");
-  userInterface.updateLowerUI(result);
+  userInterface.updateLowerUI(calculator.getResult());
   userInterface.updateUpperUI("", "");
   // console.log("first operand rezultat", calculator.getFirstOperand());
   // console.log("second operand rezultat", calculator.getSecondOperand());
   // console.log("operacija rezultat", calculator.getOperation());
+  console.log(calculator.getResult());
 });
 
 clear.addEventListener("click", function () {
@@ -172,4 +176,20 @@ del.addEventListener("click", function () {
   const first = calculator.getFirstOperand().slice(0, -1);
   calculator.setFirstOperand(first);
   userInterface.updateLowerUI(first);
+});
+
+dot.addEventListener("click", function () {
+  if (calculator.getFirstOperand() === "") {
+    calculator.setFirstOperand("0.");
+    userInterface.updateLowerUI(calculator.getFirstOperand());
+  } else if (
+    typeof calculator.getFirstOperand() === "string" &&
+    calculator.getFirstOperand().length >= 1 &&
+    !calculator.getFirstOperand().includes(".")
+  ) {
+    calculator.setFirstOperand(calculator.getFirstOperand() + ".");
+    userInterface.updateLowerUI(calculator.getFirstOperand());
+  }
+  console.log(calculator.getFirstOperand());
+  console.log(calculator.getSecondOperand());
 });

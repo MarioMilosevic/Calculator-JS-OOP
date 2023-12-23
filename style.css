@@ -81,10 +81,11 @@ body {
   height: 55%;
   width: 90%;
   margin: 0 auto;
+  gap: 2%;
 }
 
 .btn {
-  width: 90%;
+  width: 100%;
   border: 1px solid black;
   font-size: 5em;
   text-align: center;
