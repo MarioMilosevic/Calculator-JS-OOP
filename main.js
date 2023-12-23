@@ -150,7 +150,7 @@ equals.addEventListener("click", function () {
     parseInt(calculator.getFirstOperand()),
     calculator.getOperation()
   );
-  calculator.setFirstOperand(result);
+  calculator.setFirstOperand('');
   calculator.setSecondOperand("");
   calculator.setOperation("");
   userInterface.updateLowerUI(result);
@@ -170,7 +170,6 @@ clear.addEventListener("click", function () {
 
 del.addEventListener("click", function () {
   const first = calculator.getFirstOperand().slice(0, -1);
-  console.log(first);
   calculator.setFirstOperand(first);
   userInterface.updateLowerUI(first);
 });
