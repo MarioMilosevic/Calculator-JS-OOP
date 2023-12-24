@@ -28,70 +28,65 @@ const {
 } = init();
 
 function calculatorCreator() {
-   this.firstOperand = "";
-   this.secondOperand = "";
-   this.operation = "";
-   this.res = 0;
-
-  // const getFirstOperand = () => firstOperand;
-  // const setFirstOperand = (num) => (firstOperand = num);
-  // const getSecondOperand = () => secondOperand;
-  // const setSecondOperand = (num) => (secondOperand = num);
-
-  // const getOperation = () => operation;
-  // const setOperation = (value) => (operation = value);
-  // const getResult = () => res;
-  // const setResult = (value) => (res = value);
-
-  // const updateFirstOperand = (e) => {
-  //   const target = e.target.id;
-  //   firstOperand += target;
-  // };
-
-  // const updateSecondOperand = (e) => {
-  //   secondOperand = firstOperand;
-  //   firstOperand = "";
-  //   operation = e.target.id;
-  // };
-
-  // const computeResult = (a, b, o) => {
-  //   if (o === "+") {
-  //     return addFn(a, b);
-  //   } else if (o === "-") {
-  //     return subtractFn(a, b);
-  //   } else if (o === "*") {
-  //     return multiplyFn(a, b);
-  //   } else if (o === "/") {
-  //     return divideFn(a, b);
-  //   }
-  // };
-
-  // return
-  //  {
-  //   getFirstOperand,
-  //   setFirstOperand,
-  //   getSecondOperand,
-  //   getOperation,
-  //   getResult,
-  //   setResult,
-  //   setOperation,
-  //   setSecondOperand,
-  //   computeResult,
-  //   updateFirstOperand,
-  //   updateSecondOperand,
-  // };
+  this.firstOperand = "";
+  this.secondOperand = "";
+  this.operation = "";
+  this.res = 0;
 }
 
 calculatorCreator.prototype.getFirstOperand = function () {
   return this.firstOperand;
 };
 
-calculatorCreator.prototype.setFirstOpernad = function(value){
- this.firstOperand = value
-}
+calculatorCreator.prototype.getSecondOperand = function () {
+  return this.secondOperand;
+};
 
-const mario = new calculatorCreator()
-console.log(mario);
+calculatorCreator.prototype.setFirstOperand = function (value) {
+  this.firstOperand = value;
+};
+calculatorCreator.prototype.setSecondOperand = function (value) {
+  this.secondOperand = value;
+};
+
+calculatorCreator.prototype.getResult = function () {
+  return this.res;
+};
+
+calculatorCreator.prototype.setResult = function (value) {
+  this.res = value;
+};
+
+calculatorCreator.prototype.setOperation = function (value) {
+  this.operation = value;
+};
+calculatorCreator.prototype.getOperation = function () {
+  return this.operation;
+};
+
+calculatorCreator.prototype.computeResult = function (a, b, o) {
+  if (o === "+") {
+    return addFn(a, b);
+  } else if (o === "-") {
+    return subtractFn(a, b);
+  } else if (o === "*") {
+    return multiplyFn(a, b);
+  } else if (o === "/") {
+    return divideFn(a, b);
+  }
+};
+
+calculatorCreator.prototype.updateFirstOperand = function (e) {
+  const target = e.target.id;
+  this.firstOperand += target;
+};
+
+calculatorCreator.prototype.updateSecondOperand = function (e) {
+  this.secondOperand = this.firstOperand;
+  this.firstOperand = "";
+  this.operation = e.target.id;
+};
+
 
 
 
@@ -110,7 +105,8 @@ function updateUI() {
   };
 }
 
-// const calculator = calculatorCreator();
+const calculator = new calculatorCreator();
+console.log(calculator);
 const userInterface = updateUI();
 
 numbers.forEach((num) =>
