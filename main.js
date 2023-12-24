@@ -28,58 +28,72 @@ const {
 } = init();
 
 function calculatorCreator() {
-  let firstOperand = "";
-  let secondOperand = "";
-  let operation = "";
-  let res = 0;
+   this.firstOperand = "";
+   this.secondOperand = "";
+   this.operation = "";
+   this.res = 0;
 
-  const getFirstOperand = () => firstOperand;
-  const setFirstOperand = (num) => (firstOperand = num);
-  const getSecondOperand = () => secondOperand;
-  const setSecondOperand = (num) => (secondOperand = num);
+  // const getFirstOperand = () => firstOperand;
+  // const setFirstOperand = (num) => (firstOperand = num);
+  // const getSecondOperand = () => secondOperand;
+  // const setSecondOperand = (num) => (secondOperand = num);
 
-  const getOperation = () => operation;
-  const setOperation = (value) => (operation = value);
-  const getResult = () => res;
-  const setResult = (value) => (res = value);
+  // const getOperation = () => operation;
+  // const setOperation = (value) => (operation = value);
+  // const getResult = () => res;
+  // const setResult = (value) => (res = value);
 
-  const updateFirstOperand = (e) => {
-    const target = e.target.id;
-    firstOperand += target;
-  };
+  // const updateFirstOperand = (e) => {
+  //   const target = e.target.id;
+  //   firstOperand += target;
+  // };
 
-  const updateSecondOperand = (e) => {
-    secondOperand = firstOperand;
-    firstOperand = "";
-    operation = e.target.id;
-  };
+  // const updateSecondOperand = (e) => {
+  //   secondOperand = firstOperand;
+  //   firstOperand = "";
+  //   operation = e.target.id;
+  // };
 
-  const computeResult = (a, b, o) => {
-    if (o === "+") {
-      return addFn(a, b);
-    } else if (o === "-") {
-      return subtractFn(a, b);
-    } else if (o === "*") {
-      return multiplyFn(a, b);
-    } else if (o === "/") {
-      return divideFn(a, b);
-    }
-  };
+  // const computeResult = (a, b, o) => {
+  //   if (o === "+") {
+  //     return addFn(a, b);
+  //   } else if (o === "-") {
+  //     return subtractFn(a, b);
+  //   } else if (o === "*") {
+  //     return multiplyFn(a, b);
+  //   } else if (o === "/") {
+  //     return divideFn(a, b);
+  //   }
+  // };
 
-  return {
-    getFirstOperand,
-    setFirstOperand,
-    getSecondOperand,
-    getOperation,
-    getResult,
-    setResult,
-    setOperation,
-    setSecondOperand,
-    computeResult,
-    updateFirstOperand,
-    updateSecondOperand,
-  };
+  // return
+  //  {
+  //   getFirstOperand,
+  //   setFirstOperand,
+  //   getSecondOperand,
+  //   getOperation,
+  //   getResult,
+  //   setResult,
+  //   setOperation,
+  //   setSecondOperand,
+  //   computeResult,
+  //   updateFirstOperand,
+  //   updateSecondOperand,
+  // };
 }
+
+calculatorCreator.prototype.getFirstOperand = function () {
+  return this.firstOperand;
+};
+
+calculatorCreator.prototype.setFirstOpernad = function(value){
+ this.firstOperand = value
+}
+
+const mario = new calculatorCreator()
+console.log(mario);
+
+
 
 function updateUI() {
   const updateUpperUI = (num, o) => {
@@ -96,7 +110,7 @@ function updateUI() {
   };
 }
 
-const calculator = calculatorCreator();
+// const calculator = calculatorCreator();
 const userInterface = updateUI();
 
 numbers.forEach((num) =>
@@ -147,7 +161,13 @@ operators.forEach((operator) =>
 );
 
 equals.addEventListener("click", function () {
-  calculator.setResult(calculator.computeResult(parseFloat(calculator.getSecondOperand()), parseFloat(calculator.getFirstOperand()), calculator.getOperation()))
+  calculator.setResult(
+    calculator.computeResult(
+      parseFloat(calculator.getSecondOperand()),
+      parseFloat(calculator.getFirstOperand()),
+      calculator.getOperation()
+    )
+  );
   // const result = calculator.computeResult(
   //   parseInt(calculator.getSecondOperand()),
   //   parseInt(calculator.getFirstOperand()),
